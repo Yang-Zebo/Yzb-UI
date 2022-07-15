@@ -1,14 +1,21 @@
 <template>
   <div class="home">
-    <y-button></y-button>
+    <base-form :option="option"></base-form>
   </div>
 </template>
 
 <script>
+import BaseForm from "@/components/BaseForm"
+import {option} from '@/components/BaseForm/module/option'
 export default {
   name: 'Home',
   components: {
-    YButton: () => import('@/components/YButton.vue')
+    BaseForm
+  },
+  data() {
+    return {
+      option
+    }
   }
 }
 </script>
