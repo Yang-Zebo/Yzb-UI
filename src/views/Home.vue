@@ -15,7 +15,9 @@ export default {
   data() {
     return {
       option,
-      data: {}
+      data: {
+
+      }
     }
   }
 }

@@ -7,7 +7,7 @@
         :md="column.span || 6"
         :span="24">
       <el-form-item
-          :label="column.formLabel || column.label"
+          :label="`${column.formLabel || column.label} :`"
           :prop="column.prop"
           :label-width="setPx(column.formLabelWidth)">
         <slot
@@ -19,8 +19,8 @@
         ></slot>
         <component
             v-else
-            :is="formComponents(column.type)"
             v-model="formData[column.prop]"
+            :is="formComponents(column)"
             :column="column"
             :formData="formData"
             :type="column.textType || 'text'"
@@ -28,20 +28,38 @@
             :prefix-icon="column.searchPrefixIcon || ''"
             :placeholder="column.placeholder"
             :prop="column.prop"
-            :dic="column.dic"
-            @input="handleInput"
-            @change="handleChange"
-        ></component>
+            clearable
+            @[eventName]="handler"
+        >
+          <template v-if="column.type === 'select'">
+            <el-option
+                v-for="({ label, value }, index) in column.dic"
+                :key="index"
+                :label="label"
+                :value="value"></el-option>
+          </template>
+          <template v-else-if="column.type === 'radio'">
+            <el-radio
+                v-for="({ label, value }, index) in column.dic"
+                :key="index"
+                :label="value">{{ label }}</el-radio>
+          </template>
+          <template v-else-if="column.type === 'checkbox'">
+            <el-checkbox
+                v-for="({ label, value }, index) in column.dic"
+                :key="index"
+                :label="value">{{ label }}</el-checkbox>
+          </template>
+        </component>
       </el-form-item>
     </el-col>
     <el-col v-if="option.btn !== false" :span="1.5">
-      <el-form-item>
+      <el-form-item :label-width="setPx(option.btnLabelWidth)">
         <el-button
             v-if="option.resetBtn !== false"
             @click="searchReset"
             icon="el-icon-refresh"
-            :size="option.formSize"
-        >
+            :size="option.formSize">
           <template>
             {{ '重置' }}
           </template>
@@ -65,7 +83,6 @@
 
 <script>
 import {setPx} from '@/utils/baseComponents'
-import BaseSelect from "@/components/BaseForm/module/BaseSelect";
 export default {
   name: 'base-form',
   props: {
@@ -84,28 +101,36 @@ export default {
   },
   data () {
     return {
-
+      eventName: 'change'
     }
   },
   computed: {
     formComponents() {
-      return (type) => {
-        let components = {
-          'select': BaseSelect
-        }
-        return  components[type] ? components[type] : 'el-input'
+      return ({type = 'default', prop}) => {
+       let components = {
+         select: 'el-select',
+         radio: 'el-radio-group',
+         checkbox: 'el-checkbox-group',
+         default: 'el-input'
+       }
+       return components[type]
       }
     }
-
+  },
+  created() {
+    this.option.column.map(({prop, type}) => {
+      if(type === 'checkbox') {
+        this.$set(this.formData, prop, [])
+      }
+    })
   },
   methods: {
     setPx,
     searchReset() {
       this.$refs['el-form'].resetFields()
     },
-    handleInput() {},
-    handleChange() {
-      console.log(1231)
+    handler() {
+      console.log(this.formData)
     }
   }
 }
