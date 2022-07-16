@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <base-form :option="option"></base-form>
+    <base-form :formData="data" :option="option"></base-form>
   </div>
 </template>
 
@@ -14,7 +14,8 @@ export default {
   },
   data() {
     return {
-      option
+      option,
+      data: {}
     }
   }
 }

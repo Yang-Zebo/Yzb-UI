@@ -7,31 +7,28 @@
         :md="column.span || 6"
         :span="24">
       <el-form-item
-          :lalbel="column.formLabel || column.label"
+          :label="column.formLabel || column.label"
           :prop="column.prop"
           :label-width="setPx(column.formLabelWidth)">
         <slot
             v-if="column.formSlot === true"
             :name="column.prop + 'form'"
-            :form="formData"
             :prop="column.prop"
             :size="option.formSize"
             :placeholder="column.placeholder"
         ></slot>
         <component
             v-else
-            :is="inputComponents[column.type]"
+            :is="formComponents(column.type)"
             v-model="formData[column.prop]"
-            :form="formData"
             :column="column"
-            :type="column.type"
+            :formData="formData"
+            :type="column.textType || 'text'"
             :size="option.formSize"
-            :label="column.formLabel || column.label"
-            :prefix-icon="column.searchPrefixIcon"
+            :prefix-icon="column.searchPrefixIcon || ''"
             :placeholder="column.placeholder"
-            :props="column.props"
-            :checkStrictly="column.checkStrictly"
-            :show-all-levels="column.showAllLevels"
+            :prop="column.prop"
+            :dic="column.dic"
             @input="handleInput"
             @change="handleChange"
         ></component>
@@ -68,6 +65,7 @@
 
 <script>
 import {setPx} from '@/utils/baseComponents'
+import BaseSelect from "@/components/BaseForm/module/BaseSelect";
 export default {
   name: 'base-form',
   props: {
@@ -76,17 +74,27 @@ export default {
       default: () => {
         return {}
       }
+    },
+    formData: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   },
-  components: { },
   data () {
     return {
-      formData: {}
+
     }
   },
   computed: {
-    inputComponents() {
-
+    formComponents() {
+      return (type) => {
+        let components = {
+          'select': BaseSelect
+        }
+        return  components[type] ? components[type] : 'el-input'
+      }
     }
 
   },
@@ -96,7 +104,9 @@ export default {
       this.$refs['el-form'].resetFields()
     },
     handleInput() {},
-    handleChange() {}
+    handleChange() {
+      console.log(1231)
+    }
   }
 }
 </script>
