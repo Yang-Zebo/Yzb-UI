@@ -18,17 +18,22 @@
             :placeholder="column.placeholder"
         ></slot>
         <component
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
             v-else
             v-model="formData[column.prop]"
-            :is="formComponents(column)"
+            clearable
+            :is="formComponents(column.type)"
             :column="column"
             :formData="formData"
-            :type="column.textType || 'text'"
+            :type="column.type"
             :size="option.formSize"
             :prefix-icon="column.searchPrefixIcon || ''"
             :placeholder="column.placeholder"
             :prop="column.prop"
-            clearable
+            :props="column.props ? column.props : cascaderProps"
+            :options="column.dic"
             @[eventName]="handler"
         >
           <template v-if="column.type === 'select'">
@@ -53,7 +58,7 @@
         </component>
       </el-form-item>
     </el-col>
-    <el-col v-if="option.btn !== false" :span="1.5">
+    <el-col v-if="option.btn !== false" :span="0.5">
       <el-form-item :label-width="setPx(option.btnLabelWidth)">
         <el-button
             v-if="option.resetBtn !== false"
@@ -101,19 +106,23 @@ export default {
   },
   data () {
     return {
-      eventName: 'change'
+      eventName: 'change',
+      cascaderProps: {
+        expandTrigger: 'hover'
+      }
+
     }
   },
   computed: {
     formComponents() {
-      return ({type = 'default', prop}) => {
+      return (type) => {
        let components = {
          select: 'el-select',
          radio: 'el-radio-group',
          checkbox: 'el-checkbox-group',
-         default: 'el-input'
+         cascader: 'el-cascader'
        }
-       return components[type]
+       return components[type] ? components[type] : 'el-input'
       }
     }
   },

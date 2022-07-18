@@ -4,8 +4,8 @@ export let option = {
     btnLabelWidth: '100',
     column: [
         {
-            prop: 'name',
-            formLabel: '姓名',
+            prop: 'souhuo',
+            formLabel: '收获',
             formLabelWidth: '100',
             type: 'select',
             dic: [
@@ -56,6 +56,42 @@ export let option = {
                 {
                     label: '足球',
                     value: '3'
+                }
+            ]
+        },
+        {
+            prop: 'adress',
+            formLabel: '地址',
+            formLabelWidth: '100',
+            type: 'cascader',
+            dic: [
+                {
+                    label: '福建',
+                    value: 'fujian',
+                    children: [
+                        {
+                            label: '漳州',
+                            value: 'zhangzhou'
+                        },
+                        {
+                            label: '厦门',
+                            value: 'xiamen'
+                        },
+                    ]
+                },
+                {
+                    label: '浙江',
+                    value: 'zhejiang',
+                    children: [
+                        {
+                            label: '杭州',
+                            value: 'hangzhou'
+                        },
+                        {
+                            label: '绍兴',
+                            value: 'shaoxing'
+                        },
+                    ]
                 }
             ]
         }
