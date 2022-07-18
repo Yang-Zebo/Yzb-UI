@@ -58,7 +58,7 @@
         </component>
       </el-form-item>
     </el-col>
-    <el-col v-if="option.btn !== false" :span="0.5">
+    <el-col v-if="option.btn !== false"  :span="1.5"  >
       <el-form-item :label-width="setPx(option.btnLabelWidth)">
         <el-button
             v-if="option.resetBtn !== false"
@@ -146,5 +146,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.el-button {
+  margin: 0 0 0 10px !important;
+}
 </style>
