@@ -1,8 +1,8 @@
-export function setPx(len) {
+export function setPx(len, def) {
     let px = parseInt(len)
     if(px) {
-        return px + 'px'
+        return px
     } else {
-        return 'auto'
+        return def !== undefined ? def : 'auto'
     }
 }
