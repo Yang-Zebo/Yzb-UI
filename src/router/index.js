@@ -3,11 +3,27 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
   {
+    name: 'ShowComponent',
     path: '/',
-    name: 'Home',
-    component: () => import( '@/views/Home.vue')
+    redirect: '/ShowForm',
+    component: () => import('@/views/Layout'),
+    meta: { title: '组件首页', icon: 'el-icon-location'},
+    children: [
+      {
+        name: 'ShowForm',
+        path: 'ShowForm',
+        component: () => import('@/views/ShowComponent/ShowForm'),
+        meta: { title: '表单页面', icon: 'el-icon-location'}
+      },
+      {
+        name: 'ShowTable',
+        path: 'ShowTable',
+        component: () => import('@/views/ShowComponent/ShowTable'),
+        meta: { title: '表格页面', icon: 'el-icon-location'}
+      }
+    ]
   }
 ]
 

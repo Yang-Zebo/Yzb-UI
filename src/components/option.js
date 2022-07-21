@@ -1,10 +1,13 @@
+// 表格表单配置
 export let option = {
     isShowForm: true,
     formSize: 'mini',
     btnLabelWidth: '100',
+    border: true,
     column: [
         {
             prop: 'souhuo',
+            label: '收获',
             formLabel: '收获',
             formLabelWidth: '100',
             type: 'select',
@@ -25,7 +28,7 @@ export let option = {
         },
         {
             prop: 'sex',
-            formLabel: '性别',
+            label: '性别',
             formLabelWidth: '100',
             type: 'radio',
             dic: [
@@ -41,7 +44,7 @@ export let option = {
         },
         {
             prop: 'hobby',
-            formLabel: '爱好',
+            label: '爱好',
             formLabelWidth: '100',
             type: 'checkbox',
             dic: [
@@ -61,7 +64,7 @@ export let option = {
         },
         {
             prop: 'adress',
-            formLabel: '地址',
+            label: '地址',
             formLabelWidth: '100',
             type: 'cascader',
             dic: [
@@ -97,3 +100,4 @@ export let option = {
         }
     ]
 }
+
