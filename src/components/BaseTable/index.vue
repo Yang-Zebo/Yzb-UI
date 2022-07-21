@@ -51,7 +51,7 @@
           :align="column.align || option.align"
           :width="column.width"
           :label="column.label"
-          :fixed="column.fixed">
+          :fixed="column.fixed || false">
         <template #default="scope">
           <slot v-bind="scope" :name="column.prop">
             {{scope.row[column.prop]}}
