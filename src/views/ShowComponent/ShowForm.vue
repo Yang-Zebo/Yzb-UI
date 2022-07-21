@@ -8,7 +8,9 @@
 export default {
   name: 'show-form',
   props: {},
-  components: { },
+  components: {
+    PayBox
+  },
   data () {
     return { }
   },
