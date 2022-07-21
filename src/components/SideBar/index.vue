@@ -4,7 +4,8 @@
     <el-menu
       background-color="#545c64"
       text-color="#fff"
-      active-text-color="#ffd04b">
+      active-text-color="#ffd04b"
+      :default-active="active">
       <sub-menu :subMenuList="routes"></sub-menu>
     </el-menu>
   </div>
@@ -15,7 +16,12 @@ import SubMenu from './module/SubMenu.vue'
 import { routes } from '@/router'
 export default {
   name: 'side-bar',
-  props: {},
+  props: {
+    active: {
+      type: String,
+      default: ''
+    }
+  },
   components: {
     SubMenu
   },

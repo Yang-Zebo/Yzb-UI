@@ -19,7 +19,6 @@ export default (Vue) => {
             // 获得当前鼠标的x与y的坐标
             let currentX = e.pageX
             let currentY = e.pageY
-            console.log(currentX, currentY)
             document.onmousemove = (e) => {
               // 当前鼠标移动的距离x和ye
               let moveX = e.pageX - currentX
@@ -27,7 +26,6 @@ export default (Vue) => {
               // 给当前绑定的元素重新赋值外边距
               el.style.marginTop = parseInt(elMarginTop) + moveY + 'px'
               el.style.marginLeft = parseInt(elMarginLeft) + moveX + 'px'
-              console.log(e)
             }
             document.onmouseup = () => {
               document.onmousemove = null

@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <side-bar></side-bar>
+    <side-bar :active="active"></side-bar>
     <div class="layout-right">
       <nav-bar></nav-bar>
       <div class="layout-main">
@@ -20,10 +20,10 @@ export default {
     NavBar
   },
   data () {
-    return { }
-  },
-  computed: { },
-  methods: { }
+    return {
+      active: 'ShowForm'
+    }
+  }
 }
 </script>
 

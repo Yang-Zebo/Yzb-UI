@@ -7,15 +7,15 @@
         :md="column.span || 6"
         :span="24">
       <el-form-item
-          :label="`${column.formLabel ? column.formLabel : column.label} :`"
+          :label="`${column.formLabel || column.label} :`"
           :prop="column.prop"
-          :label-width="column.formLabelWidth">
+          :label-width="column.formLabelWidth || 'auto'">
         <slot
-            v-if="column.formSlot === true"
-            :name="column.prop + 'form'"
-            :prop="column.prop"
-            :size="option.formSize"
-            :placeholder="column.placeholder"
+          v-if="column.formSlot === true"
+          :name="column.prop + 'form'"
+          :prop="column.prop"
+          :size="option.formSize"
+          :placeholder="column.placeholder"
         ></slot>
         <component
             range-separator="至"
@@ -58,7 +58,7 @@
         </component>
       </el-form-item>
     </el-col>
-    <el-col v-if="option.btn !== false"  :span="1.5"  >
+    <el-col v-if="option.btn !== false"  :span="24"  >
       <el-form-item :label-width="option.btnLabelWidth">
         <el-button
             v-if="option.resetBtn !== false"
@@ -144,6 +144,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.base-form {
+  overflow: hidden;
+}
 .el-button {
   margin: 0 0 0 10px !important;
 }
