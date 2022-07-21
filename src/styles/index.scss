@@ -1,0 +1,39 @@
+@import "./normalize.scss";
+@import "./common.scss";
+// 样式重置
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body{
+  width: 100%;
+  height: 100%;
+}
+html {
+  overflow: hidden;
+}
+
+/*控制整个滚动条*/
+::-webkit-scrollbar {
+  background-color: #ccc;
+  width: 10px;
+  background-clip: padding-box;
+}
+
+/*滚动条两端方向按钮*/
+::-webkit-scrollbar-button {
+  background-color: #ccc;
+  display: none;
+}
+
+/*滚动条中间滑动部分*/
+::-webkit-scrollbar-thumb {
+  background-color: #999;
+  border-radius: 5px;
+}
+
+/*滚动条右下角区域*/
+::-webkit-scrollbar-corner {
+  background-color: #ccc;
+}

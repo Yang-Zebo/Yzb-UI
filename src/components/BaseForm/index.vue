@@ -7,9 +7,9 @@
         :md="column.span || 6"
         :span="24">
       <el-form-item
-          :label="`${column.formLabel || column.label} :`"
+          :label="`${column.formLabel ? column.formLabel : column.label} :`"
           :prop="column.prop"
-          :label-width="setPx(column.formLabelWidth)">
+          :label-width="column.formLabelWidth">
         <slot
             v-if="column.formSlot === true"
             :name="column.prop + 'form'"
@@ -59,7 +59,7 @@
       </el-form-item>
     </el-col>
     <el-col v-if="option.btn !== false"  :span="1.5"  >
-      <el-form-item :label-width="setPx(option.btnLabelWidth)">
+      <el-form-item :label-width="option.btnLabelWidth">
         <el-button
             v-if="option.resetBtn !== false"
             @click="searchReset"
@@ -87,7 +87,6 @@
 </template>
 
 <script>
-import {setPx} from '@/utils/baseComponents'
 export default {
   name: 'base-form',
   props: {
@@ -134,7 +133,6 @@ export default {
     })
   },
   methods: {
-    setPx,
     searchReset() {
       this.$refs['el-form'].resetFields()
     },
