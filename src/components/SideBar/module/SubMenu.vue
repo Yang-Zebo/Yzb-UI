@@ -1,10 +1,10 @@
 <template>
   <div class="sub-menu">
-    <template v-for="{ name, children, meta, path } in subMenuList">
+    <template v-for="{ name, children, meta } in subMenuList">
       <el-submenu
           v-if="children && children.length > 0"
-          :key="path"
-          :index="path"
+          :key="name"
+          :index="name"
       >
         <template slot="title">
           <i :class="meta.icon"></i>
@@ -12,7 +12,7 @@
         </template>
         <sub-menu :subMenuList="children"></sub-menu>
       </el-submenu>
-      <el-menu-item v-else :key="path" :index="meta.path" @click="to(name)">
+      <el-menu-item v-else :key="name" :index="name" @click="to(name)">
         <i :class="meta.icon"></i>
         <span>{{ meta.title }}</span>
       </el-menu-item>

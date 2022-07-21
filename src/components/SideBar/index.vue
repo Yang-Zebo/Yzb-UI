@@ -2,11 +2,9 @@
   <div class="side-bar">
     <div class="web-title">My Layout</div>
     <el-menu
-        default-active="/ShowForm"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-    >
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b">
       <sub-menu :subMenuList="routes"></sub-menu>
     </el-menu>
   </div>
