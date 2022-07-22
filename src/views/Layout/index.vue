@@ -1,10 +1,10 @@
 <template>
   <div class="layout">
-    <side-bar :active="active"></side-bar>
+    <side-bar></side-bar>
     <div class="layout-right">
       <nav-bar></nav-bar>
       <div class="layout-main">
-        <router-view></router-view>
+        <router-view v-if="show"></router-view>
       </div>
     </div>
   </div>
@@ -15,13 +15,24 @@ import SideBar from '@/components/SideBar/index'
 import NavBar from '@/components/NavBar/index'
 export default {
   name: 'layout',
+  provide() {
+    return {
+      refresh: this.refresh
+    }
+  },
   components: {
     SideBar,
     NavBar
   },
-  data () {
+  data() {
     return {
-      active: 'ShowForm'
+      show: true
+    }
+  },
+  methods: {
+    refresh() {
+      this.show = false
+      this.$nextTick(() => (this.show = true))
     }
   }
 }

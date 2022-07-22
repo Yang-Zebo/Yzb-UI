@@ -23,6 +23,7 @@
 <script>
 export default {
   name: 'sub-menu',
+  inject: ['refresh'],
   props: {
     subMenuList: {
       type: Array,
@@ -34,9 +35,15 @@ export default {
   },
   methods: {
     to(name) {
-      this.$router.push({
-        name
-      })
+      if(this.$route.name === name) {
+        // 刷新layout的 router-view
+        this.refresh()
+        return
+      } else {
+        this.$router.push({
+          name
+        })
+      }
     }
   }
 }

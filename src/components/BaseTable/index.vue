@@ -44,17 +44,21 @@
       </template>
       <!-- 循环列 -->
       <el-table-column
-          v-for="(column, index) in option.column"
-          :key="column.prop"
-          :prop="column.prop"
-          :min-width="column.minWidth"
-          :align="column.align || option.align"
-          :width="column.width"
-          :label="column.label"
-          :fixed="column.fixed || false">
+        v-for="(column, index) in option.column"
+        :key="column.prop"
+        :prop="column.prop"
+        :min-width="column.minWidth"
+        :align="column.align || option.align"
+        :label="column.label"
+        :fixed="column.fixed || false">
         <template #default="scope">
-          <slot v-bind="scope" :name="column.prop">
-            {{scope.row[column.prop]}}
+          <slot v-bind="scope" :name="column.prop" >
+            <span v-if="column.formatText" >{{column.formatText(scope.row[column.prop])}}</span>
+            <span v-else-if="isShowDicText(scope.row[column.prop], column.dic)">
+              {{isShowDicText(scope.row[column.prop],column.dic)}}
+
+            </span>
+            <span v-else>{{scope.row[column.prop]}}</span>
           </slot>
         </template>
       </el-table-column>
@@ -80,13 +84,22 @@ export default {
     },
     rowClassName: Function,
   },
-  components: { },
   data () {
     return {
       tableLoading: false
     }
   },
-  computed: { },
+  computed: {
+    isShowDicText() {
+      return (val, dic) => {
+        for(let item of dic) {
+          if(val === item.value) {
+            return item.label
+          }
+        }
+      }
+    }
+  },
   methods: {
     //行添加class
     tableRowClassName(param) {

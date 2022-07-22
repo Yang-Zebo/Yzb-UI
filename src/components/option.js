@@ -6,9 +6,8 @@ export let option = {
     border: true,
     column: [
         {
-            prop: 'souhuo',
-            label: '收获',
-            formLabel: '收获',
+            prop: 'number',
+            label: '数量',
             formLabelWidth: '100',
             type: 'select',
             dic: [
@@ -40,7 +39,10 @@ export let option = {
                     label: '女',
                     value: '0'
                 }
-            ]
+            ],
+            formatText(val) {
+                console.log(val)
+            }
         },
         {
             prop: 'hobby',
@@ -63,7 +65,7 @@ export let option = {
             ]
         },
         {
-            prop: 'adress',
+            prop: 'address',
             label: '地址',
             formLabelWidth: '100',
             type: 'cascader',
@@ -79,7 +81,7 @@ export let option = {
                         {
                             label: '厦门',
                             value: 'xiamen'
-                        },
+                        }
                     ]
                 },
                 {
@@ -93,11 +95,36 @@ export let option = {
                         {
                             label: '绍兴',
                             value: 'shaoxing'
-                        },
+                        }
                     ]
                 }
             ]
         }
     ]
 }
-
+export let tableData = [
+    {
+        number: '1',
+        sex: '1',
+        hobby: '1',
+        address: 'zhangzhou'
+    },
+    {
+        number: '2',
+        sex: '0',
+        hobby: '2',
+        address: 'xiamen'
+    },
+    {
+        number: '',
+        sex: '1',
+        hobby: '3',
+        address: 'hangzhou'
+    },
+    {
+        number: '2',
+        sex: '0',
+        hobby: '3',
+        address: 'shaoxing'
+    }
+]
