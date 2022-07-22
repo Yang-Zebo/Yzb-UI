@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {option} from '@/components/option'
+import { option, tableData} from '@/components/option'
 export default {
   name: 'show-table',
   props: {},
@@ -15,7 +15,7 @@ export default {
   data () {
     return {
       option,
-      tableData: []
+      tableData
     }
   },
   computed: { },

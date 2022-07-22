@@ -17,10 +17,7 @@ import { routes } from '@/router'
 export default {
   name: 'side-bar',
   props: {
-    active: {
-      type: String,
-      default: ''
-    }
+
   },
   components: {
     SubMenu
@@ -31,6 +28,9 @@ export default {
     }
   },
   computed: {
+    active() {
+      return this.$route.name
+    }
   },
   methods: { }
 }
