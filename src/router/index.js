@@ -24,6 +24,20 @@ export const routes = [
         meta: { title: '表格页面', icon: 'el-icon-location'}
       }
     ]
+  },
+  {
+    name: 'TestComponents',
+    path: '/TestComponents',
+    component: () => import('@/views/Layout'),
+    meta: { title: '测试页面', icon: 'el-icon-location'},
+    children: [
+      {
+        name: 'TestComponents1',
+        path: 'TestComponents11',
+        component: () => import('@/views/TestComponents'),
+        meta: { title: '测试页面1', icon: 'el-icon-location'}
+      }
+    ]
   }
 ]
 
